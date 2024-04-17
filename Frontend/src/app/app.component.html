@@ -1,0 +1,17 @@
+<div class="container">
+  <button (click)="currentView = 'home'">Home</button>
+  <button (click)="currentView = 'register'">Register</button>
+  <button (click)="currentView = 'signIn'">Sign In</button>
+
+  <ng-container *ngIf="currentView === 'home'">
+    <div>Home</div>
+  </ng-container>
+
+  <ng-container *ngIf="currentView === 'register'">
+    <div>Register</div>
+  </ng-container>
+
+  <ng-container *ngIf="currentView === 'signIn'">
+    <div>Sign in</div>
+  </ng-container>
+</div>
