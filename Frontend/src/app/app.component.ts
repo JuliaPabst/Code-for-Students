@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,7 @@ import { HomeComponent } from './home/home.component';
     RegisterComponent,
     SignInComponent,
     HomeComponent,
+    ProfileComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
