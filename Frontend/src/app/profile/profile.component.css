@@ -1,0 +1,30 @@
+h1 {
+  font-size: 30px;
+  display: inline-block;
+  vertical-align: middle;
+  padding-top: 10px;
+}
+
+span {
+  margin-right: 10px;
+}
+
+div {
+  padding: 10px;
+}
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+#content {
+  background-color: #e1e1e1;
+  color: #302f2f;
+  width: 400px;
+  height: 100%;
+}
