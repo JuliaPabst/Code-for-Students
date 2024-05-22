@@ -8,6 +8,7 @@ A social media website using Angular and express.js for students to share their 
 - angular (material)
 - typescript
 - ts-node (for converting typescript to javascript)
+- start with ng serve -o
 
 # Backend
 
