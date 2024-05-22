@@ -1,4 +1,5 @@
 class User {
+    imageRef: string;
     name: string;
     description: string;
     status: string;
@@ -6,6 +7,7 @@ class User {
     totalPosts: number;
     totalComments: number;
     constructor() {
+        this.imageRef = "";
         this.name = "";
         this.description = "";
         this.status = "";
