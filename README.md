@@ -4,6 +4,12 @@ A social media website using Angular and express.js for students to share their 
 
 # Frontend
 
+## Dependencies
+- angular (material)
+- typescript
+- ts-node (for converting typescript to javascript)
+- start with ng serve -o
+
 # Backend
 
 ## Dependencies
@@ -25,5 +31,9 @@ A social media website using Angular and express.js for students to share their 
 
 ## Server.ts
 
+<<<<<<< HEAD
 - local hosting of website
 - start with: npm start in folder backend
+=======
+- start with: npm start
+>>>>>>> fd73e99984ccf65cb274a6960dbba539711ef729
