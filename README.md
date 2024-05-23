@@ -15,10 +15,15 @@ A social media website using Angular and express.js for students to share their 
 - ts-node (for converting typescript to javascript)
 - express and cors types
 
-## MongoDB Atlas
+## Database
 
-- Access via MongoDB for VSCode or MongoDBCompass
+- Access via MongoDB for VSCode and MongoDBCompass
+- Requirements:
+  - MongoShell -> mongosh
+  - MongoDB (community edition)
+  - Atlas Account
 
 ## Server.ts
 
-- start with: npm start
+- local hosting of website
+- start with: npm start in folder backend
