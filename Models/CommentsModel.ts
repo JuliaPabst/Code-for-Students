@@ -13,12 +13,12 @@ const mongoose = require('mongoose');
 const AutoIncrement = require('mongoose-sequence')(mongoose);
 
 const commentsSchema = mongoose.Schema({
-    author: {String, required: true},
-    createdAt: {Date, default: Date.now},
-    commentContent: {String, required: true},
+    author: { String, required: true },
+    createdAt: { Date, default: () => Date.now(), immutable: true },
+    commentContent: { String, required: true },
     likes: [String]
 });
 
-commentsSchema.plugin(AutoIncrement, {inc_field: 'commentId'});
+commentsSchema.plugin(AutoIncrement, { inc_field: 'commentId' });
 
 module.exports = mongoose.model('Comments', commentsSchema);

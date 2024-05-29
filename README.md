@@ -5,6 +5,7 @@ A social media website using Angular and express.js for students to share their 
 # Frontend
 
 ## Dependencies
+
 - angular (material)
 - typescript
 - ts-node (for converting typescript to javascript)
