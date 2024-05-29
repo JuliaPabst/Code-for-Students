@@ -20,6 +20,9 @@ A social media website using Angular and express.js for students to share their 
 - typescript
 - ts-node (for converting typescript to javascript)
 - express and cors types
+- dotenv (environemtn variables)
+- mongoose (dbschema)
+- mongoose-sequence(auto increment values in db)
 
 ## Database
 
@@ -33,3 +36,9 @@ A social media website using Angular and express.js for students to share their 
 
 - local hosting of website
 - start with: npm start in folder backend
+- connection with MongoDbAtlas via connection string
+
+### Mongoose
+
+- schemas for db
+- mongoose-seqence -> auto incerement value in db
