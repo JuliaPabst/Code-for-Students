@@ -1,3 +1,108 @@
-#examplePost {
-    border: 2px solid black;
+#posts-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+#all-posts {
+  width: 100%;
+  max-width: 600px;
+}
+
+.single-post {
+  border: 2px solid white;
+  border-radius: 3%;
+  width: 600px;
+  padding: 30px;
+}
+
+.picture-username-date {
+  display: flex;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.username-and-date {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.post-date {
+  font-size: 14px;
+  color: #ccc;
+}
+
+.post-text {
+  padding: 20px 0;
+}
+
+.code-container {
+  background-color: #222;
+  color: #f8f8f8;
+  padding: 10px;
+  margin: 0 20px;
+  border-radius: 5px;
+  white-space: pre;
+  font-family: monospace;
+  overflow-x: auto;
+  margin-bottom: 10px;
+}
+
+.comment-like-section {
+  display: flex;
+  align-items: center;
+}
+
+.likes-container {
+  padding: 10px 0;
+  font-weight: 500;
+}
+
+.like-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.comments-container {
+  padding: 10px 0;
+  font-weight: 500;
+  margin-left: 20px;
+}
+
+.comment-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+  background-color: white;
+}
+
+.read-more-container {
+  text-decoration: underline;
+}
+
+.read-more-button {
+  background-color: white;
+  color: #222;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  font-family: Montserrat;
+  margin-top: 10px;
+  margin-right: 5px;
 }

@@ -1,18 +1,21 @@
 <div id="content">
-    <div>
+  <form id="content">
+    <legend>Edit profile</legend>
+    <div class="picture-container">
       <label for="profilePicture">Picture</label>
-      <input type="file" id="profilePicture" name="profilePicture">
+      <input type="file" id="profilePicture" name="profilePicture" />
     </div>
-    <div>
-        <label for="profileName">Name</label>
-        <input type="text" id="profileName" name="profileName">
+    <div class="name-container">
+      <label for="profileName">Name</label>
+      <input type="text" id="profileName" name="profileName" />
     </div>
-    <div>
+    <div class="profile-description-container">
       <textarea placeholder="Profile Description"></textarea>
     </div>
-    <div>
+    <div class="status-container">
       <label for="profileStatus">Status</label>
-      <input type="text" id="profileStatus" name="profileStatus">
+      <input type="text" id="profileStatus" name="profileStatus" />
     </div>
+    <button>Save changes</button>
+  </form>
 </div>
-  

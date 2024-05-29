@@ -1,19 +1,52 @@
-<div>
-    <div id="examplePost">
-        <div>
-            <input type="text" name="postLikes" id="postLikes" value="42" readonly>
-            <p>Likes</p>
+<div id="posts-container">
+  <div id="all-posts">
+    <div class="single-post">
+      <div class="picture-username-date">
+        <img
+          class="profile-picture"
+          src="https://www.w3schools.com/howto/img_avatar.png"
+          alt="profile picture"
+        />
+        <div class="username-and-date">
+          <div class="username">Username</div>
+          <div class="post-date">02.12.2024</div>
         </div>
-        <div>
-            <p id="username">Username</p>
-            <input type="date" readonly name="postDate" id="postDate">
+      </div>
+      <div class="post">
+        <div class="post-text">
+          This is my code for the backend project. I hope you like it.
         </div>
-        <div>
-            <textarea name="post" id="post" readonly>Post placeholder</textarea>
+        <div class="code-container">
+          <pre><code> 
+    const express = require("express");
+    console.log("served on http://localhost:" + port);
+     </code></pre>
         </div>
-        <div>
-            <input type="text" readonly value="42">
-            <p>Comments</p>
+        <div class="comment-like-section">
+          <div class="likes-container">
+            <img
+              class="like-image"
+              src="../../assets/likes-image.jpeg"
+              alt="like image"
+            />
+            <span class="number-post-likes">45 </span>
+            <span>Likes</span>
+          </div>
+          <div class="comments-container">
+            <img
+              class="comment-image"
+              src="../../assets/comment-image.webp"
+              alt="like image"
+            />
+            <span class="number-post-comments">42 </span>
+            <span class="comments">Comments</span>
+          </div>
         </div>
+      </div>
+      <div class="read-more-container">
+        <button class="read-more-button">+</button>
+        <span>Read more</span>
+      </div>
     </div>
+  </div>
 </div>

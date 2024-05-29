@@ -1,20 +1,82 @@
-<div>
-    <div id="postDetail">
-        <div>
-            <p id="username">Username</p>
-            <input type="date" readonly name="postDate" id="postDate">
+<div id="posts-container">
+  <div id="all-posts">
+    <div class="single-post">
+      <div class="picture-username-date">
+        <img
+          class="profile-picture"
+          src="https://www.w3schools.com/howto/img_avatar.png"
+          alt="profile picture"
+        />
+        <div class="username-and-date">
+          <div class="username">Tom</div>
+          <div class="post-date">02.12.2024</div>
         </div>
-        <div>
-            <textarea name="post" id="post" readonly>Post placeholder</textarea>
+      </div>
+      <div class="post">
+        <div class="post-text">
+          This is my code for the backend project. I hope you like it.
         </div>
+        <div class="code-container">
+          <pre><code> 
+    const express = require("express");
+    console.log("served on http://localhost:" + port);
+     </code></pre>
+        </div>
+        <div class="comment-like-section">
+          <div class="likes-container">
+            <img
+              class="like-image"
+              src="../../assets/likes-image.jpeg"
+              alt="like image"
+            />
+            <span class="number-post-likes">45 </span>
+            <span>Likes</span>
+          </div>
+          <div class="comments-container">
+            <img
+              class="comment-image"
+              src="../../assets/comment-image.webp"
+              alt="like image"
+            />
+            <span class="number-post-comments">42 </span>
+            <span class="comments">Comments</span>
+          </div>
+        </div>
+      </div>
+      <div id="comments">
+        <div class="single-comment">
+          <hr />
+          <div class="picture-username-date-comment">
+            <img
+              class="profile-picture-comment"
+              src="https://www.w3schools.com/howto/img_avatar.png"
+              alt="profile picture"
+            />
+            <div class="username-and-date-comment">
+              <div class="username-comment">Christoph</div>
+              <div class="comment-date">03.12.2024</div>
+            </div>
+          </div>
+          <div class="comment-content">
+            <div class="comment-text">Nice code! I would add this code!</div>
+            <div class="code-container-comment">
+              <pre><code> 
+    const comment = require("comment");
+    console.log("served on http://localhost:" + port);
+     </code></pre>
+            </div>
+            <div class="likes-container-comment">
+              <img
+                class="like-image-comment"
+                src="../../assets/likes-image.jpeg"
+                alt="like image"
+              />
+              <span class="number-post-likes-comment">45 </span>
+              <span>Likes</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div id="exampleComment">
-        <div>
-            <p id="commentName">CommentName</p>
-            <input type="date" readonly name="commentDate" id="commentDate">
-        </div>
-        <div>
-            <textarea name="comment" id="comment" readonly>Comment placeholder</textarea>
-        </div>
-    </div>
+  </div>
 </div>
