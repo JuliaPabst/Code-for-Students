@@ -3,6 +3,9 @@
 <mat-menu #menu="matMenu">
   <button mat-menu-item (click)="currentView = 'home'">Home</button>
   <button mat-menu-item (click)="currentView = 'profile'">Profile</button>
+  <a mat-raised-button color="primary" type="button" routerLink="/register"
+    >Register</a
+  >
   <button mat-menu-item (click)="currentView = 'register'">Register</button>
   <button mat-menu-item (click)="currentView = 'signIn'">Sign In</button>
   <button mat-menu-item (click)="currentView = 'edit-profile'">Edit</button>
