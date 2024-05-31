@@ -6,5 +6,10 @@ button {
     cursor: pointer;
     font-family: Montserrat;
   }
+
+  a{
+    text-decoration: none;
+    color: #302f2f;
+  }
   
   
