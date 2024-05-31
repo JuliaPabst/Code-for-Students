@@ -1,0 +1,13 @@
+<button mat-button [matMenuTriggerFor]="menu">Menu</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item >
+        <a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page">Home</a>
+      </button>
+    <button mat-menu-item >
+      <a routerLink="register" routerLinkActive="active" ariaCurrentWhenActive="page">Register</a>
+    </button>
+    <button mat-menu-item >
+      <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page">Login</a>
+    </button>
+</mat-menu>
+  
