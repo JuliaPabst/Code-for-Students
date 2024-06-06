@@ -1,0 +1,15 @@
+button {
+    background-color: white;
+    color: #302f2f;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    font-family: Montserrat;
+  }
+
+  a{
+    text-decoration: none;
+    color: #302f2f;
+  }
+  
+  

@@ -1,24 +1,2 @@
-<button mat-button [matMenuTriggerFor]="menu">Menu</button>
-
-<mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="currentView = 'home'">Home</button>
-  <button mat-menu-item (click)="currentView = 'profile'">Profile</button>
-  <button mat-menu-item (click)="currentView = 'register'">Register</button>
-  <button mat-menu-item (click)="currentView = 'signIn'">Sign In</button>
-</mat-menu>
-
-<ng-container *ngIf="currentView === 'home'">
-  <app-home></app-home>
-</ng-container>
-
-<ng-container *ngIf="currentView === 'profile'">
-  <app-profile></app-profile>
-</ng-container>
-
-<ng-container *ngIf="currentView === 'register'">
-  <app-register></app-register>
-</ng-container>
-
-<ng-container *ngIf="currentView === 'signIn'">
-  <app-sign-in></app-sign-in>
-</ng-container>
+<app-navbar></app-navbar>
+<router-outlet></router-outlet>
