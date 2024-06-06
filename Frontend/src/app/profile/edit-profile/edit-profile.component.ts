@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
+import { Output } from '@angular/core';
 
 @Component({
   selector: 'app-edit-profile',
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrl: './edit-profile.component.css'
 })
 export class EditProfileComponent {
-
+  @Output() profileView = '';
 }

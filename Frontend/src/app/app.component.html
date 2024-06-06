@@ -5,8 +5,6 @@
   <button mat-menu-item (click)="currentView = 'profile'">Profile</button>
   <button mat-menu-item (click)="currentView = 'register'">Register</button>
   <button mat-menu-item (click)="currentView = 'signIn'">Sign In</button>
-  <button mat-menu-item (click)="currentView = 'edit-profile'">Edit</button>
-  <button mat-menu-item (click)="currentView = 'detail-view'">Detail</button>
 </mat-menu>
 
 <ng-container *ngIf="currentView === 'home'">
@@ -23,12 +21,4 @@
 
 <ng-container *ngIf="currentView === 'signIn'">
   <app-sign-in></app-sign-in>
-</ng-container>
-
-<ng-container *ngIf="currentView === 'edit-profile'">
-  <app-edit-profile></app-edit-profile>
-</ng-container>
-
-<ng-container *ngIf="currentView === 'detail-view'">
-  <app-detail-view></app-detail-view>
 </ng-container>
