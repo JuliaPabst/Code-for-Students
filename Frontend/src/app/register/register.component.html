@@ -1,71 +1,77 @@
-<form class="login-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
-  <h1>Login</h1>
-  <div id="username">
-    <mat-form-field>
-      <mat-label>Enter your username</mat-label>
-      <input
-        matInput
-        placeholder="matt2024"
-        [formControl]="username"
-        (blur)="updateErrorMessage()"
-        required
-        name="username"
-      />
+<form *ngIf="!isLoading" (ngSubmit)='register()' [formGroup]="registerForm">
+  <h1>Sign up</h1>
+  <div id="userData">
+    <div id="username">
+    <mat-form-field appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput type="text" placeholder="username" formControlName="username"/>
+      <mat-error *ngIf="form['username']?.errors?.['minlength']"
+      >Mininal length is 4.</mat-error
+    >
     </mat-form-field>
   </div>
-  <div id="email1">
-    <mat-form-field>
+  <div id="email">
+    <mat-form-field appearance="fill">
       <mat-label>Enter your email</mat-label>
       <input
         matInput
-        placeholder="pat@example.com"
-        [formControl]="email1"
-        (blur)="updateErrorMessage()"
-        required
-        name="email1"
+        type="email"
+        placeholder="email"
+        formControlName="email"
       />
-      @if (email1.invalid) {
-      <mat-error>{{ errorMessage }}</mat-error>
-      }
-    </mat-form-field>
-  </div>
-  <div id="email2">
-    <mat-form-field>
-      <mat-label>Enter your email</mat-label>
-      <input
-        matInput
-        placeholder="pat@example.com"
-        [formControl]="email2"
-        (blur)="updateErrorMessage()"
-        required
-        name="email2"
-      />
-      @if (email2.invalid) {
-      <mat-error>{{ errorMessage }}</mat-error>
-      }
+      <mat-error *ngIf="form['email']?.errors?.['required']"
+        >Please enter valid email.</mat-error
+      >
+      <mat-error *ngIf="form['email']?.errors?.['minlength']"
+        >Mininal length is 4.</mat-error
+      >
+      <mat-error *ngIf="form['email']?.errors?.['email']"
+        >Enter an email.</mat-error
+      >
+      <mat-error *ngIf="form['email']?.errors?.['pattern']"
+        >Not the right username.</mat-error
+      >
     </mat-form-field>
   </div>
   <div id="password1">
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" />
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        placeholder="Password"
+        formControlName="password1"
+      />
       <button
         mat-icon-button
+        type="button"
         matSuffix
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
         [attr.aria-pressed]="hide"
       >
-        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-      </button>
+        <mat-icon>{{
+          hide ? "visibility_off" : "visibility"
+        }}</mat-icon></button
+      ><mat-error *ngIf="form['password1']?.errors?.['required']"
+        >Please enter a password.</mat-error
+      ><mat-error *ngIf="form['password1']?.errors?.['minlength']"
+        >Password is too short.</mat-error
+      >
     </mat-form-field>
   </div>
   <div id="password2">
-    <mat-form-field>
-      <mat-label>Enter your password</mat-label>
-      <input matInput [type]="hide ? 'password' : 'text'" />
+    <mat-form-field appearance="fill">
+      <mat-label>Repeat your password</mat-label>
+      <input
+        matInput
+        [type]="hide ? 'password' : 'text'"
+        placeholder="Password"
+        formControlName="password2"
+      />
       <button
         mat-icon-button
+        type="button"
         matSuffix
         (click)="hide = !hide"
         [attr.aria-label]="'Hide password'"
@@ -73,9 +79,22 @@
       >
         <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
       </button>
+      <mat-error *ngIf="form['password2']?.errors?.['required']"
+        >Please enter a password.</mat-error
+      >
+      <mat-error *ngIf="form['password2']?.errors?.['minlength']"
+        >Password is too short.</mat-error
+      >
     </mat-form-field>
+  
+    <mat-error *ngIf="registerForm.hasError('passwordMismatch')"
+      >Passwords are not the same.</mat-error
+    >
   </div>
-  <div class="example-button-row">
-    <button mat-flat-button type="submit">Sign up</button>
   </div>
+  <mat-error *ngIf="signupFailed"
+    >Sign up failed. There might be a problem with your username or your
+    password!</mat-error
+  >
+  <button mat-raised-button type="submit">Sign up</button>
 </form>

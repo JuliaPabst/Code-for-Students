@@ -6,6 +6,9 @@ import {
   NgForm,
   FormsModule,
   ReactiveFormsModule,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors, FormGroup, FormBuilder
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,22 +16,97 @@ import { merge } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [MatFormFieldModule,
+  imports: [
+    MatFormFieldModule,
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule,],
+    MatDividerModule, NgIf],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  
+  passwordMatchValidator: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const password1 = control.get('password1');
+    const password2 = control.get('password2');
+
+    return password1 && password2 && password1.value !== password2.value
+      ? { passwordMismatch: true }
+      : null;
+  };
+
+  email = '';
+  password1 = '';
+  password2 = '';
+  hide = true;
+  isLoading = false;
+  signupFailed = false;
+
+  registerForm: FormGroup = this.fb.group(
+    {
+      username: new FormControl('', [Validators.required, Validators.minLength(4)]),
+      email: new FormControl(this.email, [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.email,
+      ]),
+      password1: new FormControl(this.password1, [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+      password2: new FormControl(this.password2, [
+        Validators.required,
+        Validators.minLength(8),
+      ]),
+    },
+    { validators: this.passwordMatchValidator }
+  );
+
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {}
+
+  register() {
+    const emailControl = this.registerForm.get('email');
+    const password1Control = this.registerForm.get('password1');
+    const password2Control = this.registerForm.get('password2');
+
+    if (
+      emailControl?.errors?.['required'] ||
+      password1Control?.errors?.['required'] ||
+      password2Control?.errors?.['required']
+    ) {
+      this.signupFailed = true;
+    } else {
+      this.signupFailed = false;
+    }
+
+    if (this.registerForm.valid) {
+      this.isLoading = true;
+      console.log('Login successful.');
+      this.signupFailed = false;
+    } else {
+      console.log('Login failed.');
+      this.signupFailed = true;
+    }
+  }
+
+  get form(): { [key: string]: AbstractControl } {
+    return this.registerForm.controls;
+  }
+
+  get passwordMismatch(): boolean {
+    return this.registerForm.hasError('passwordMismatch');
+  }
 
 }
