@@ -1,14 +1,19 @@
-<form class="signIn-form">
-  <fieldset>
-    <legend>Sign In</legend>
-    <div>
-      <label for="userName">User name:</label>
-      <input type="text" name="userName" required />
-    </div>
-    <div>
-      <label for="password">Password:</label>
-      <input type="password" name="password" required />
-    </div>
-    <button type="submit" class="submit-button">Submit</button>
-  </fieldset>
-</form>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form *ngIf="!isLoading" (ngSubmit)='login()' [formGroup]="loginForm">
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your email</mat-label>
+      <input matInput type="email" placeholder="E-Mail" formControlName="email" />
+      <mat-error *ngIf="form['email']?.errors?.['required']">Please enter valid email.</mat-error>
+      <mat-error *ngIf="form['email']?.errors?.['minlength']">Mininal length is 4.</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password" />
+      <mat-error *ngIf="form['password']?.errors?.['required']">Please enter a password.</mat-error>
+      <button mat-icon-button type="button" matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Login</button>
+  </form>
