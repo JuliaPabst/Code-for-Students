@@ -45,7 +45,19 @@ export class RegisterComponent {
       : null;
   };
 
-  email = '';
+  emailMatchValidator: ValidatorFn = (
+    control: AbstractControl
+  ): ValidationErrors | null => {
+    const email1 = control.get('email1');
+    const email2 = control.get('email2');
+
+    return email1 && email2 && email1.value !== email2.value
+      ? { emailMismatch: true }
+      : null;
+  };
+
+  email1 = '';
+  email2 = '';
   password1 = '';
   password2 = '';
   hide = true;
@@ -55,7 +67,12 @@ export class RegisterComponent {
   registerForm: FormGroup = this.fb.group(
     {
       username: new FormControl('', [Validators.required, Validators.minLength(4)]),
-      email: new FormControl(this.email, [
+      email1: new FormControl(this.email1, [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.email,
+      ]),
+      email2: new FormControl(this.email2, [
         Validators.required,
         Validators.minLength(4),
         Validators.email,
@@ -69,7 +86,7 @@ export class RegisterComponent {
         Validators.minLength(8),
       ]),
     },
-    { validators: this.passwordMatchValidator }
+    { validators: [this.passwordMatchValidator, this.emailMatchValidator] }
   );
 
   constructor(private fb: FormBuilder) {}
@@ -77,12 +94,14 @@ export class RegisterComponent {
   ngOnInit(): void {}
 
   register() {
-    const emailControl = this.registerForm.get('email');
+    const email1Control = this.registerForm.get('email1');
+    const email2Control = this.registerForm.get('email2');
     const password1Control = this.registerForm.get('password1');
     const password2Control = this.registerForm.get('password2');
 
     if (
-      emailControl?.errors?.['required'] ||
+      email1Control?.errors?.['required'] || 
+      email2Control?.errors?.['required'] ||
       password1Control?.errors?.['required'] ||
       password2Control?.errors?.['required']
     ) {
@@ -107,6 +126,10 @@ export class RegisterComponent {
 
   get passwordMismatch(): boolean {
     return this.registerForm.hasError('passwordMismatch');
+  }
+
+  get emailMismatch(): boolean {
+    return this.registerForm.hasError('emailMismatch');
   }
 
 }

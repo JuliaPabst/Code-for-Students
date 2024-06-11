@@ -10,28 +10,53 @@
     >
     </mat-form-field>
   </div>
-  <div id="email">
+  <div id="email1">
     <mat-form-field appearance="fill">
       <mat-label>Enter your email</mat-label>
       <input
         matInput
         type="email"
         placeholder="email"
-        formControlName="email"
+        formControlName="email1"
       />
-      <mat-error *ngIf="form['email']?.errors?.['required']"
+      <mat-error *ngIf="form['email1']?.errors?.['required']"
         >Please enter valid email.</mat-error
       >
-      <mat-error *ngIf="form['email']?.errors?.['minlength']"
+      <mat-error *ngIf="form['email1']?.errors?.['minlength']"
         >Mininal length is 4.</mat-error
       >
-      <mat-error *ngIf="form['email']?.errors?.['email']"
+      <mat-error *ngIf="form['email1']?.errors?.['email']"
         >Enter an email.</mat-error
       >
-      <mat-error *ngIf="form['email']?.errors?.['pattern']"
+      <mat-error *ngIf="form['email1']?.errors?.['pattern']"
         >Not the right username.</mat-error
       >
     </mat-form-field>
+  </div>
+  <div id="email2">
+    <mat-form-field appearance="fill">
+      <mat-label>Repeat your email</mat-label>
+      <input
+        matInput
+        type="email"
+        placeholder="email"
+        formControlName="email2"
+      />
+      <mat-error *ngIf="form['email2']?.errors?.['required']"
+        >Please enter valid email.</mat-error
+      >
+      <mat-error *ngIf="form['email2']?.errors?.['minlength']"
+        >Mininal length is 4.</mat-error
+      >
+      <mat-error *ngIf="form['email2']?.errors?.['email']"
+        >Enter an email.</mat-error
+      >
+      <mat-error *ngIf="form['email2']?.errors?.['pattern']"
+        >Not the right username.</mat-error
+      >
+    </mat-form-field>
+    <mat-error *ngIf="registerForm.hasError('emailMismatch')"
+      >Emails are not the same.</mat-error>
   </div>
   <div id="password1">
     <mat-form-field appearance="fill">
