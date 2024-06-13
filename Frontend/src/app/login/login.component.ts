@@ -24,7 +24,7 @@ import { MatDividerModule } from '@angular/material/divider';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule,
+    MatDividerModule
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

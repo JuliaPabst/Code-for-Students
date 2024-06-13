@@ -1,9 +1,30 @@
-<div id="content">
-    <div>
-        <input type="text" placeholder="Title" [(value)]="postTitle">
+<form class="create-form" #createForm="ngForm" (ngSubmit)="onSubmit(createForm)">
+    <h1>Create Post</h1>
+    <div id="title">
+        <mat-form-field>
+          <mat-label>Post Title</mat-label>
+          <input
+            matInput
+            placeholder="Title"
+            required
+            name="title"
+            [(ngModel)]="createTitle"
+          />
+        </mat-form-field>
     </div>
-    <div>
-        <textarea rows="4" cols="50" placeholder="type your post here" [(value)]="postText"></textarea>
+    <div id="title">
+        <mat-form-field>
+          <mat-label>Code</mat-label>
+          <textarea matInput
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="4"
+            cdkAutosizeMaxRows="5"
+            required
+            placeholder="Code"
+            [(ngModel)]="createCode"
+            name="code"></textarea>
+        </mat-form-field>
     </div>
-    <input type="submit" value="Submit">
-</div>
+    <button mat-flat-button type="submit">Post</button>
+</form>
