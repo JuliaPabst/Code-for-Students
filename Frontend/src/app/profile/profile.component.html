@@ -1,6 +1,7 @@
-<app-view-profile></app-view-profile>
-<app-edit-profile></app-edit-profile>
+@if(profileView == "view-profile"){
+    <app-view-profile (changeView)="handleChangeView($event)"></app-view-profile>
+}
 
-<ng-container *ngIf="profileView === 'view'">
-  <button>Edit Profile</button>
-</ng-container>
+@if(profileView == "edit-profile"){
+    <app-edit-profile (changeView)="handleChangeView($event)"></app-edit-profile>
+}

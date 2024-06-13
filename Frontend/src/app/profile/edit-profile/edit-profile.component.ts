@@ -1,5 +1,6 @@
 import { Component, output } from '@angular/core';
 import { Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-edit-profile',
@@ -9,5 +10,9 @@ import { Output } from '@angular/core';
   styleUrl: './edit-profile.component.css'
 })
 export class EditProfileComponent {
-  @Output() profileView = '';
+  @Output() changeView = new EventEmitter<string>();
+
+  onChangeView(){
+    this.changeView.emit('view-profile');
+  }
 }

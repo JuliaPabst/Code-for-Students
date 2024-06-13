@@ -1,15 +1,17 @@
-button {
-    background-color: white;
-    color: #302f2f;
-    padding: 14px 20px;
-    border: none;
-    cursor: pointer;
-    font-family: Montserrat;
-  }
+.navbar-item {
+  color: #302f2f;
+  padding: 14px 20px;
+  border: none;
+  cursor: pointer;
+  font-family: Montserrat;
+  border-radius: 25px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
 
-  a{
-    text-decoration: none;
-    color: #302f2f;
-  }
-  
-  
+a{
+  text-decoration: none;
+  color: #302f2f;
+}
