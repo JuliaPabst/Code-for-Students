@@ -1,15 +1,37 @@
-<form class="signIn-form">
-    <fieldset>
-      <legend>Login</legend>
-      <div>
-        <label for="userName">User name:</label>
-        <input type="text" name="userName" required />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" required />
-      </div>
-      <button type="submit" class="submit-button">Submit</button>
-    </fieldset>
-  </form>
-  
+<form class="login-form" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+  <h1>Login</h1>
+  <div id="email">
+    <mat-form-field>
+      <mat-label>Enter your email</mat-label>
+      <input
+        matInput
+        placeholder="pat@example.com"
+        [formControl]="email"
+        (blur)="updateErrorMessage()"
+        required
+        name="email"
+      />
+      @if (email.invalid) {
+      <mat-error>{{ errorMessage }}</mat-error>
+      }
+    </mat-form-field>
+  </div>
+  <div id="password">
+    <mat-form-field>
+      <mat-label>Enter your password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'" />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="hide = !hide"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="hide"
+      >
+        <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+  <div class="example-button-row">
+    <button mat-flat-button type="submit">Login</button>
+  </div>
+</form>

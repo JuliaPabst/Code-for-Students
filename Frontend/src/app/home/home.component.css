@@ -2,52 +2,54 @@
   display: flex;
   justify-content: center;
   padding: 20px;
-}
-
-#all-posts {
+  
+  }
+  
+  #all-posts {
   width: 100%;
   max-width: 600px;
-}
-
-.single-post {
+  }
+  
+  .single-post {
   border: 2px solid white;
   border-radius: 3%;
   width: 600px;
   padding: 30px;
-}
-
-.picture-username-date {
+  margin-bottom: 10px;
+  }
+  
+  .picture-username-date {
   display: flex;
   align-items: center;
-}
-
-.profile-picture {
+  }
+  
+  .profile-picture {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin-right: 10px;
-}
-
-.username-and-date {
+  }
+  
+  .username-and-date {
   display: flex;
   flex-direction: column;
-}
-
-.username {
+  }
+  
+  .username {
   font-size: 24px;
   font-weight: bold;
-}
-
-.post-date {
+  }
+  
+  .post-date {
   font-size: 14px;
   color: #ccc;
-}
-
-.post-text {
+  }
+  
+  .post-text {
   padding: 20px 0;
-}
-
-.code-container {
+  }
+  
+  .code-container {
   background-color: #222;
   color: #f8f8f8;
   padding: 10px;
@@ -57,52 +59,101 @@
   font-family: monospace;
   overflow-x: auto;
   margin-bottom: 10px;
-}
-
-.comment-like-section {
+  }
+  
+  .comment-like-section {
   display: flex;
   align-items: center;
-}
-
-.likes-container {
+  }
+  
+  .likes-container {
   padding: 10px 0;
   font-weight: 500;
-}
-
-.like-image {
+  }
+  
+  .like-image {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   margin-right: 5px;
-}
-
-.comments-container {
+  }
+  
+  .comments-container {
   padding: 10px 0;
   font-weight: 500;
   margin-left: 20px;
-}
-
-.comment-image {
+  }
+  
+  #comments {
+  
+  padding: 20px;
+  background-color: #494545;
+  border-radius: 3%;
+  margin-bottom: 10px;
+  }
+  
+  .comment-image {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   margin-right: 5px;
   background-color: white;
-}
-
-.read-more-container {
-  text-decoration: underline;
-}
-
-.read-more-button {
-  background-color: white;
-  color: #222;
+  }
+  
+  .picture-username-date-comment {
+  display: flex;
+  align-items: center;
+  }
+  
+  .profile-picture-comment {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  border: none;
-  cursor: pointer;
-  font-family: Montserrat;
-  margin-top: 10px;
+  margin-right: 10px;
+  }
+  
+  .username-and-date-comment {
+  display: flex;
+  flex-direction: column;
+  }
+  
+  .comment-date {
+  font-size: 12px;
+  color: #ccc;
+  }
+  
+  .username-comment {
+  font-size: 20px;
+  font-weight: bold;
+  }
+  
+  .comment-text {
+  padding: 20px 0;
+  }
+  
+  .code-container-comment {
+  background-color: #222;
+  color: #f8f8f8;
+  padding: 10px;
+  margin: 0 20px;
+  border-radius: 5px;
+  white-space: pre;
+  font-family: monospace;
+  overflow-x: auto;
+  margin-bottom: 10px;
+  }
+  
+  .likes-container-comment {
+  padding: 10px 0;
+  font-weight: 500;
+  font-size: 15px;
+  }
+  
+  .like-image-comment {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
   margin-right: 5px;
-}
+  }
+  
+  

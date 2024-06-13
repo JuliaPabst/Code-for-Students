@@ -1,23 +1,49 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, OnInit, inject } from '@angular/core';
+import { NgIf } from '@angular/common';
 
-import { HomeComponent } from './home.component';
+@Component({
+selector: 'app-home',
+standalone: true,
+imports: [HttpClientModule, NgIf],
+templateUrl: './home.component.html',
+styleUrl: './home.component.css'
+})
+export class HomeComponent implements OnInit {
 
-describe('HomeComponent', () => {
-  let component: HomeComponent;
-  let fixture: ComponentFixture<HomeComponent>;
+httpClient = inject(HttpClient);
+posts :any [] = [];
+comments :any [] = [];
+comments_count : number = 0;
+show_comments : boolean = false;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [HomeComponent]
-    })
-    .compileComponents();
-    
-    fixture = TestBed.createComponent(HomeComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+ngOnInit(): void {
+this.fetchPosts();
+this.fetchComments();
+} 
+fetchPosts(){
+this.httpClient
+/* .get('https://jsonplaceholder.typicode.com/posts') */
+.get('http://localhost:5000/posts')
+.subscribe((posts : any)=>{
+console.log(posts);
+this.posts = posts;
+})
+}
+fetchComments() {
+this.httpClient
+.get('http://localhost:5000/comments')
+.subscribe((comments: any) => {
+this.comments = comments;
+this.posts.forEach(post => {
+const postComments = this.comments.filter(comment => comment.postId === post.id);
+post.comments_count = postComments.length;
+post.showComments = false; 
 });
+})
+}
+toggleComments(post: any) {
+post.showComments = !post.showComments;
+}
+}
+
