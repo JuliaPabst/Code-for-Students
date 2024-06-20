@@ -26,7 +26,7 @@ app.listen(port, () => {
     console.log("Website served on http://localhost:" + port);
 });
 
-const mongoDBatlas = 'mongodb+srv://thomas:+++++++@testcluster.d6mjom5.mongodb.net/';
+const mongoDBatlas = '';
 mongoose.connect(mongoDBatlas
     ).then(() => {
         console.log("Connected to the database!");
