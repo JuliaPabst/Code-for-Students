@@ -4,14 +4,22 @@ import User from '../Models/SignUp'; // Passen Sie den Pfad zu Ihrem User-Modell
 const router = Router();
 
 router.post("/signUp", async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+  const { username, email, password } = req.body;
+
   try {
-    const user = await User.findOne({ email, password });
-    if (user) {
-      res.json({ success: true, message: 'Login successful', user });
-    } else {
-      res.status(401).json({ success: false, message: 'Invalid credentials' });
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ success: false, message: 'User already exists' });
     }
+
+    // Create a new user instance
+    const newUser = new User({ username, email, password });
+
+    // Save the new user to the database
+    await newUser.save();
+
+    res.json({ success: true, message: 'User registered successfully', user: newUser });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error', error });
   }

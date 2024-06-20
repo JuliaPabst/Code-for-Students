@@ -93,6 +93,7 @@ export class RegisterComponent {
 
   ngOnInit(): void {}
 
+
   register() {
     const email1Control = this.registerForm.get('email1');
     const email2Control = this.registerForm.get('email2');
@@ -113,6 +114,35 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.isLoading = true;
       console.log('Login successful.');
+
+      const formData = {
+        username: this.registerForm.get('username')?.value,
+        email: this.registerForm.get('email1')?.value,
+        password: this.registerForm.get('password1')?.value,
+      };
+
+      console.log("Sucess!!!!!!!!!!!");
+
+      fetch("http://localhost:3000/api/signUp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ formData }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error("Network response was not ok.");
+        })
+        .then((data) => {
+          console.log("Success:", data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+      
       this.signupFailed = false;
     } else {
       console.log('Login failed.');

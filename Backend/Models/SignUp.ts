@@ -18,13 +18,11 @@ const userSchema: Schema<IUser> = new Schema({
         type: String,
         required: true,
         unique: true,
-
     },
     password: {
         type: String,
         required: true,
-
-    }
+    },
 });
 
 // Model for the User
