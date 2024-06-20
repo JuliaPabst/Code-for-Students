@@ -29,7 +29,7 @@ import { MatDividerModule } from '@angular/material/divider';
 })
 export class EditProfileComponent {
   @Output() changeView = new EventEmitter<string>();
-  @Output() passUserData = new EventEmitter<object>();
+  @Output() passUserData = new EventEmitter<{"username": string, "description": string, "status": string}>();
 
   editUsername: string;
   editDescription: string;
@@ -47,7 +47,11 @@ export class EditProfileComponent {
 
   onSubmit(){
     this.onChangeView();
-    const userData: object = {
+    const userData: {
+      "username": string,
+      "description": string,
+      "status": string
+    } = {
       "username": this.editUsername,
       "description": this.editDescription,
       "status": this.editStatus
