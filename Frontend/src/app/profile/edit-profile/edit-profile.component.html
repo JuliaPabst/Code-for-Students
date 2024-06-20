@@ -1,0 +1,44 @@
+<form class="edit-form" #editForm="ngForm" (ngSubmit)="onSubmit()">
+  <h1>Create Post</h1>
+  <div id="username">
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          placeholder="Username"
+          required
+          name="username"
+          [(ngModel)]="editUsername"
+        />
+      </mat-form-field>
+  </div>
+  <div id="description">
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="4"
+      cdkAutosizeMaxRows="5"
+      required
+      placeholder="Description"
+      [(ngModel)]="editDescription"
+      name="description"></textarea>
+    </mat-form-field>
+  </div>
+  <div id="status">
+    <mat-form-field>
+      <mat-label>Status</mat-label>
+      <textarea matInput
+      cdkTextareaAutosize
+      #autosize="cdkTextareaAutosize"
+      cdkAutosizeMinRows="4"
+      cdkAutosizeMaxRows="5"
+      required
+      placeholder="Status"
+      [(ngModel)]="editStatus"
+      name="status"></textarea>
+    </mat-form-field>
+  </div>
+  <button mat-flat-button type="submit">Submit</button>
+</form>

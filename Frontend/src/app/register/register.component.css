@@ -19,7 +19,7 @@ div {
   margin-top: 10px;
 }
 
-button {
+mat-flat-button {
   margin-top: 10px;
   background-color: white;
   color: #302f2f;

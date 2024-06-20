@@ -1,32 +1,7 @@
-<div id="content">
-  <div>
-    <img
-      src="../../assets/profile-picture-default.jpeg"
-      alt="Profile Picture"
-      class="profile-picture"
-    />
-    <h1>Profile Name</h1>
-  </div>
-  <div>
-    <p>Profile Description</p>
-  </div>
-  <div>
-    <span>Status:</span>
-    <span>Profile Status</span>
-  </div>
-  <div>
-    <span>Registered since:</span>
-    <span>05.06.2024</span>
-  </div>
-  <div>
-    <span>Total Posts:</span>
-    <span>42</span>
-  </div>
-  <div>
-    <span>Total Comments:</span>
-    <span>42</span>
-  </div>
-  <div>
-    <button>Edit profile</button>
-  </div>
-</div>
+@if(profileView == "view-profile"){
+    <app-view-profile (changeView)="handleChangeView($event)" [viewUserData]="userData"></app-view-profile>
+}
+
+@if(profileView == "edit-profile"){
+    <app-edit-profile (changeView)="handleChangeView($event)" (userData)="handleSubmit($event)"></app-edit-profile>
+}

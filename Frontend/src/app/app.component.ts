@@ -4,12 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { RegisterComponent } from './register/register.component';
-import { SignInComponent } from './sign-in/sign-in.component';
-import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
-import { EditProfileComponent } from './edit-profile/edit-profile.component';
-import { DetailViewComponent } from './detail-view/detail-view.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
@@ -19,12 +14,7 @@ import { DetailViewComponent } from './detail-view/detail-view.component';
     MatMenuModule,
     CommonModule,
     RouterOutlet,
-    RegisterComponent,
-    SignInComponent,
-    HomeComponent,
-    ProfileComponent,
-    EditProfileComponent,
-    DetailViewComponent
+    NavbarComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

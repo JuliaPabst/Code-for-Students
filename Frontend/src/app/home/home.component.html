@@ -1,52 +1,77 @@
 <div id="posts-container">
   <div id="all-posts">
-    <div class="single-post">
-      <div class="picture-username-date">
-        <img
-          class="profile-picture"
-          src="https://www.w3schools.com/howto/img_avatar.png"
-          alt="profile picture"
-        />
-        <div class="username-and-date">
-          <div class="username">Username</div>
-          <div class="post-date">02.12.2024</div>
-        </div>
-      </div>
-      <div class="post">
-        <div class="post-text">
-          This is my code for the backend project. I hope you like it.
-        </div>
-        <div class="code-container">
-          <pre><code> 
-    const express = require("express");
-    console.log("served on http://localhost:" + port);
-     </code></pre>
-        </div>
-        <div class="comment-like-section">
-          <div class="likes-container">
-            <img
-              class="like-image"
-              src="../../assets/likes-image.jpeg"
-              alt="like image"
-            />
-            <span class="number-post-likes">45 </span>
-            <span>Likes</span>
-          </div>
-          <div class="comments-container">
-            <img
-              class="comment-image"
-              src="../../assets/comment-image.webp"
-              alt="like image"
-            />
-            <span class="number-post-comments">42 </span>
-            <span class="comments">Comments</span>
-          </div>
-        </div>
-      </div>
-      <div class="read-more-container">
-        <button class="read-more-button">+</button>
-        <span>Read more</span>
-      </div>
-    </div>
+  @for(post of posts; track post.id) { 
+  <div class="single-post">
+  <div class="picture-username-date">
+  <img
+  class="profile-picture"
+  src="https://www.w3schools.com/howto/img_avatar.png"
+  alt="profile picture"
+  />
+  <div class="username-and-date">
+  <div class="username">{{ post.userName }}</div>
+  <div class="post-date">{{ post.date }}</div>
   </div>
-</div>
+  </div>
+  <div class="post">
+  <div class="post-text">{{ post.title }}</div>
+  <div class="code-container">
+  <pre><code>{{ post.body }}</code></pre>
+  </div>
+  <div class="comment-like-section">
+  <div class="likes-container">
+  <img
+  class="like-image"
+  src="../../assets/likes-image.jpeg"
+  alt="like image"
+  />
+  <span class="number-post-likes">{{post.likes}}</span>
+  <span>Likes</span>
+  </div>
+  <div class="comments-container">
+  <img
+  class="comment-image"
+  src="../../assets/comment-image.webp"
+  alt="comment image"
+  />
+  <span class="number-post-comments">{{post.comments_count}}</span>
+  <span class="comments">
+  <button mat-button (click)="toggleComments(post)">Comments</button>
+  </span>
+  </div>
+  </div>
+  </div>
+  
+  <div id="comments" *ngIf="post.showComments">
+  @for(comment of comments; track comment.id) { 
+  @if(comment.postId == post.id) { 
+  
+  <div class="single-comment">
+  <hr />
+  <div class="picture-username-date-comment">
+  <img
+  class="profile-picture-comment"
+  src="https://www.w3schools.com/howto/img_avatar.png"
+  alt="profile picture"
+  />
+  <div class="username-and-date-comment">
+  <div class="username-comment">{{ comment.name }}</div>
+  <div class="comment-date">{{ comment.date }}</div>
+  </div>
+  </div>
+  <div class="comment-content">
+  <div class="comment-text">{{ comment.email }}</div>
+  <div class="code-container-comment">
+  <pre><code>{{ comment.body }}</code></pre>
+  </div>
+  </div>
+  </div>
+  } 
+  } 
+  </div>
+  </div>
+  } 
+  </div>
+  </div>
+  
+  

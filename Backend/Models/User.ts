@@ -16,3 +16,16 @@ class User {
         this.totalComments = 0;
     }
 }
+
+const mongoose = require('mongoose');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+
+const userSchema = mongoose.Schema({
+    authorizeData: [authorizeSchema],
+    comments: [commentsSchema],
+    posts: [postsSchema]
+});
+
+userSchema.plugin(AutoIncrement, { inc_field: 'userId' });
+
+module.exports = mongoose.model('User', userSchema);
