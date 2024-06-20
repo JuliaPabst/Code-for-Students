@@ -13,6 +13,9 @@ app.use(cors({
     origin: ["http://localhost:4200"]
 }));
 
+import signUpRouter from "../routes/signUpRoute";
+app.use("/api/signUp", signUpRouter);
+
 app.get("/api", (req, res) => {
     res.send("Hello from the backend!");
 });
@@ -35,30 +38,28 @@ app.get('/comments', (req, res) => {
     ];
     res.json(comments);
     });
-    app.get('/posts', (req, res) => {
+
+app.get('/posts', (req, res) => {
     const posts = [
     { id: 1, userId: 1, userName: 'Philip', title: 'Post 1', body: 'This is the body of post 1', date: '2024-06-06', likes:'12' },
     { id: 2, userId: 2, userName: 'Bender',title: 'Post 2', body: 'This is the body of post 2', date: '2024-06-06', likes:'24' },
     { id: 3, userId: 3, userName: 'Zoidberg',title: 'Post 3', body: 'This is the body of post 3', date: '2024-06-06', likes:'36' }
     ];
     res.json(posts);
-    });
+});
 
 
 
-
-
-
-const port = 5000;
+const port = 3000;
 app.listen(port, () => {
     console.log("Website served on http://localhost:" + port);
 });
 
-const mongoDBatlas = process.env.DATABASE_URL;
-mongoose.connect(mongoDBatlas
-    , { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
+const mongoDBatlas = 'mongodb+srv://thomas:thomasITP@testcluster.d6mjom5.mongodb.net/';
+mongoose.connect(mongoDBatlas).then(() => {
         console.log("Connected to the database!");
     }).catch((error: any) => {
         console.log("Connection failed!");
         console.log(error);
     });
+
