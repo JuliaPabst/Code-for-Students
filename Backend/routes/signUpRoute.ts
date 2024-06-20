@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import User from '../Models/SignUp'; // Passen Sie den Pfad zu Ihrem User-Modell an
+import User from '../Models/UsersModel'; // Passen Sie den Pfad zu Ihrem User-Modell an
 
 const router = Router();
 
@@ -23,6 +23,12 @@ router.post("/signUp", async (req: Request, res: Response) => {
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error', error });
   }
+
+  router.get("/signUp"), async (req: Request, res: Response) => {
+    res.send("Hello from the backend!");
+  };
 });
+
+
 
 export default router;

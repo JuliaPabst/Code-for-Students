@@ -6,7 +6,15 @@ require("dotenv").config({ path: "../.env" });
 const mongoose = require("mongoose");
 const app = express();
 // frontend served on localhost:4200
-// backend served on localhost:5000
+// backend served on localhost:3000
+
+const mongoDBatlas = 'mongodb+srv://thomas:thomasITP@testcluster.d6mjom5.mongodb.net/';
+mongoose.connect(mongoDBatlas).then(() => {
+        console.log("Connected to the database!");
+    }).catch((error: any) => {
+        console.log("Connection failed!");
+        console.log(error);
+    });
 
 app.use(cors({
     credentials: true,
@@ -14,7 +22,7 @@ app.use(cors({
 }));
 
 import signUpRouter from "../routes/signUpRoute";
-app.use("/api/signUp", signUpRouter);
+app.use("/api", signUpRouter);
 
 app.get("/api", (req, res) => {
     res.send("Hello from the backend!");
@@ -48,18 +56,8 @@ app.get('/posts', (req, res) => {
     res.json(posts);
 });
 
-
-
 const port = 3000;
 app.listen(port, () => {
     console.log("Website served on http://localhost:" + port);
 });
-
-const mongoDBatlas = 'mongodb+srv://thomas:thomasITP@testcluster.d6mjom5.mongodb.net/';
-mongoose.connect(mongoDBatlas).then(() => {
-        console.log("Connected to the database!");
-    }).catch((error: any) => {
-        console.log("Connection failed!");
-        console.log(error);
-    });
 
