@@ -14,8 +14,24 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 })
 export class ProfileComponent {
   profileView: string = 'view-profile';
+  userData: {
+    username: string,
+    description: string,
+    status: string
+  };
+
+  constructor() {
+    this.userData = {
+      "username": '',
+      "description": '',
+      "status": ''
+    };
+  }
 
   handleChangeView(newView: string){
     this.profileView = newView;
+  }
+
+  handleSubmit(data: object){
   }
 }

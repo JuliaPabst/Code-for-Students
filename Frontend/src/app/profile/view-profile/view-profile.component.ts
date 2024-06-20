@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 
@@ -11,6 +11,11 @@ import { EventEmitter } from '@angular/core';
 })
 export class ViewProfileComponent {
   @Output() changeView = new EventEmitter<string>();
+  @Input() viewUserData: object
+
+  constructor() {
+    this.viewUserData = {}
+  }
 
   onChangeView(){
     this.changeView.emit('edit-profile');
