@@ -1,23 +1,21 @@
 import { Component } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormControl,
   Validators,
-  NgForm,
-  FormsModule,
-  ReactiveFormsModule,
-  ValidatorFn,
   AbstractControl,
-  ValidationErrors, FormGroup, FormBuilder
+  ValidationErrors,
+  FormGroup,
+  FormBuilder,
+  ReactiveFormsModule,
+  FormsModule
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { merge } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgIf } from '@angular/common';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http'; // Importiere HttpClient und HttpClientModule
 
 @Component({
   selector: 'app-register',
@@ -29,12 +27,15 @@ import { NgIf } from '@angular/common';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule, NgIf],
+    MatDividerModule,
+    NgIf,
+    HttpClientModule // Füge HttpClientModule zu den Imports hinzu
+  ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  passwordMatchValidator: ValidatorFn = (
+  passwordMatchValidator: Validators = (
     control: AbstractControl
   ): ValidationErrors | null => {
     const password1 = control.get('password1');
@@ -45,7 +46,7 @@ export class RegisterComponent {
       : null;
   };
 
-  emailMatchValidator: ValidatorFn = (
+  emailMatchValidator: Validators = (
     control: AbstractControl
   ): ValidationErrors | null => {
     const email1 = control.get('email1');
@@ -89,10 +90,12 @@ export class RegisterComponent {
     { validators: [this.passwordMatchValidator, this.emailMatchValidator] }
   );
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private http: HttpClient // Injektieren des HttpClient
+  ) {}
 
   ngOnInit(): void {}
-
 
   register() {
     const email1Control = this.registerForm.get('email1');
@@ -119,30 +122,22 @@ export class RegisterComponent {
         username: this.registerForm.get('username')?.value,
         email: this.registerForm.get('email1')?.value,
         password: this.registerForm.get('password1')?.value,
+        text: this.registerForm.get('text')?.value
       };
 
-      console.log("Sucess!!!!!!!!!!!");
-
-      fetch("http://localhost:3000/api/signUp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      // Verwende HttpClient, um die Anmeldeinformationen zu senden
+      this.http.post<any>('http://localhost:3000/api/users/register', formData).subscribe(
+        (response) => {
+          console.log('User registered:', response);
+          this.isLoading = false;
         },
-        body: JSON.stringify({ formData }),
-      })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error("Network response was not ok.");
-        })
-        .then((data) => {
-          console.log("Success:", data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-      
+        (error) => {
+          console.error('Error in user Registration:', error);
+          this.signupFailed = true;
+          this.isLoading = false;
+        }
+      );
+
       this.signupFailed = false;
     } else {
       console.log('Login failed.');
@@ -161,5 +156,4 @@ export class RegisterComponent {
   get emailMismatch(): boolean {
     return this.registerForm.hasError('emailMismatch');
   }
-
 }

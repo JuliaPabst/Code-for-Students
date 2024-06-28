@@ -1,35 +1,34 @@
-import express from "express";
-import cors from "cors";
+import express, { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import userRegister from '../routes/UserRegister';
 
-require("dotenv").config({ path: "../.env" });
-
-const mongoose = require("mongoose");
 const app = express();
-// frontend served on localhost:4200
-// backend served on localhost:3000
+const port = process.env.PORT || 3000;
 
-const mongoDBatlas = 'mongodb+srv://thomas:thomasITP@testcluster.d6mjom5.mongodb.net/';
-mongoose.connect(mongoDBatlas).then(() => {
-        console.log("Connected to the database!");
-    }).catch((error: any) => {
-        console.log("Connection failed!");
-        console.log(error);
-    });
+app.use(cors());
+app.use(bodyParser.json());
 
-app.use(cors({
-    credentials: true,
-    origin: ["http://localhost:4200"]
-}));
+// MongoDB URI
+const uri = "mongodb+srv://mloehlein:ADMIN@itp.xdihusq.mongodb.net/yourDatabaseName?retryWrites=true&w=majority";
 
-import signUpRouter from "../routes/signUpRoute";
-app.use("/api", signUpRouter);
+// Mongoose connection
+mongoose.connect(uri)
+  .then(() => console.log('MongoDB connected...'))
+  .catch((err: any) => console.log(err));
 
-app.get("/api", (req, res) => {
-    res.send("Hello from the backend!");
-});
+// Use user routes
+app.use(userRegister); 
 
-app.get("/", (req, res) => {
-    res.send();
+// Express route example
+app.get('/ping', async (req: Request, res: Response) => {
+  try {
+    await mongoose.connection.db.admin().ping();
+    res.send("Pinged your deployment. You successfully connected to MongoDB!");
+  } catch (err: any) {
+    res.status(500).send('Error pinging MongoDB');
+  }
 });
 
 app.get('/comments', (req, res) => {
@@ -56,8 +55,9 @@ app.get('/posts', (req, res) => {
     res.json(posts);
 });
 
-const port = 3000;
+
+
 app.listen(port, () => {
-    console.log("Website served on http://localhost:" + port);
-});
+    console.log(`Server running on port ${port}`);
+  });
 
