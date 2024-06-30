@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import userRegister from '../routes/UserRegister';
+import userLogin from '../routes/UserLogin';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -29,7 +30,7 @@ mongoose.connect(uri)
 
 // Use user routes
 app.use(userRegister);
-
+app.use(userLogin);
 
 //Should be removed
 app.get('/comments', (req: Request, res: Response) => {
@@ -55,6 +56,7 @@ app.get('/posts', (req: Request, res: Response) => {
   ];
   res.json(posts);
 });
+
 
 
 app.listen(port, () => {

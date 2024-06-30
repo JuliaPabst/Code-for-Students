@@ -24,7 +24,7 @@ this.fetchComments();
 fetchPosts(){
 this.httpClient
 /* .get('https://jsonplaceholder.typicode.com/posts') */
-.get('http://localhost:5000/posts')
+.get('http://localhost:3000/posts')
 .subscribe((posts : any)=>{
 console.log(posts);
 this.posts = posts;
@@ -32,7 +32,7 @@ this.posts = posts;
 }
 fetchComments() {
 this.httpClient
-.get('http://localhost:5000/comments')
+.get('http://localhost:3000/comments')
 .subscribe((comments: any) => {
 this.comments = comments;
 this.posts.forEach(post => {

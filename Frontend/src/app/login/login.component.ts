@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   FormControl,
+  FormGroup,
   Validators,
-  NgForm,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { merge } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { NgIf } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -24,35 +24,40 @@ import { MatDividerModule } from '@angular/material/divider';
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
-    MatDividerModule
+    MatDividerModule,
+    NgIf,
+    HttpClientModule // Importiere HttpClientModule
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  templateUrl: '../login/login.component.html',
+  styleUrls: ['../login/login.component.css'],
 })
 export class LoginComponent {
-  onSubmit(loginForm: NgForm) {
-    console.log(loginForm.value);
+  loginForm: FormGroup;
+
+  constructor(private http: HttpClient) {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
+    });
   }
 
   hide = true;
-
-  email = new FormControl('', [Validators.required, Validators.email]);
-
   errorMessage = '';
 
-  constructor() {
-    merge(this.email.statusChanges, this.email.valueChanges)
-      .pipe(takeUntilDestroyed())
-      .subscribe(() => this.updateErrorMessage());
-  }
-
-  updateErrorMessage() {
-    if (this.email.hasError('required')) {
-      this.errorMessage = 'You must enter a value';
-    } else if (this.email.hasError('email')) {
-      this.errorMessage = 'Not a valid email';
-    } else {
-      this.errorMessage = '';
+  onSubmit() {
+    if (this.loginForm.invalid) {
+      console.error('Email and password are required');
+      return;
     }
+
+    const { email, password } = this.loginForm.value;
+    this.http.post<any>('http://localhost:3000/api/users/login', { email, password }).subscribe(
+      (response) => {
+        console.log('Login successful:', response);
+      },
+      (error) => {
+        console.error('Error logging in:', error);
+      }
+    );
   }
 }
