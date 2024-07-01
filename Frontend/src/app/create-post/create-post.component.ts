@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-post',
@@ -29,13 +30,23 @@ export class CreatePostComponent {
   createTitle: string;
   createCode: string;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.createTitle = '';
     this.createCode = '';
-  }  
-  
-  onSubmit(loginForm: NgForm) {
-    console.log(this.createTitle);
-    console.log(this.createCode);
+  }
+
+  onSubmit(createPostForm: NgForm) {
+    const postData = {
+      username: 'defaultUser', // Replace with actual username
+      post_title: this.createTitle,
+      post_content: this.createCode
+    };
+
+    this.http.post('http://localhost:3000/api/posts/create', postData)
+      .subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.error('Error creating post:', error);
+      });
   }
 }
