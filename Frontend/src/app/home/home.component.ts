@@ -20,15 +20,24 @@ show_comments : boolean = false;
 ngOnInit(): void {
     this.fetchPosts();
     this.fetchComments();
-} 
-fetchPosts(){
+}
+/*fetchPosts(){
 this.httpClient
-/* .get('https://jsonplaceholder.typicode.com/posts') */
+.get('https://jsonplaceholder.typicode.com/posts')
 .get('http://localhost:5000/posts')
 .subscribe((posts : any)=>{
 console.log(posts);
 this.posts = posts;
 })
+}*/
+fetchPosts() {
+  this.httpClient.get('http://localhost:3000/api/posts')
+    .subscribe((posts: any) => {
+      console.log(posts);
+      this.posts = posts;
+    }, error => {
+      console.error('Error fetching posts:', error);
+    });
 }
 fetchComments() {
 this.httpClient
@@ -38,7 +47,7 @@ this.comments = comments;
 this.posts.forEach(post => {
 const postComments = this.comments.filter(comment => comment.postId === post.id);
 post.comments_count = postComments.length;
-post.showComments = false; 
+post.showComments = false;
 });
 })
 }
