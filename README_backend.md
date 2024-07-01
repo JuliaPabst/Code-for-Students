@@ -20,8 +20,6 @@ A social media website using Angular and express.js for students to share their 
 
 ## Database
 
-@@ -33,3 +36,9 @@ A social media website using Angular and express.js for students to share their
-
 - local hosting of website
 - start with: npm start in folder backend
 - connection with MongoDbAtlas via connection string
