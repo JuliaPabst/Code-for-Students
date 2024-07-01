@@ -2,8 +2,11 @@ import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import createPost from '../routes/createPost';
 import userRegister from '../routes/UserRegister';
 import userLogin from '../routes/UserLogin';
+import getPosts from '../routes/getPosts';
+import userProfile from '../routes/userProfile';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,7 +34,9 @@ mongoose.connect(uri)
 // Use user routes
 app.use(userRegister);
 app.use(userLogin);
-
+app.use(createPost);
+app.use(getPosts);
+app.use(userProfile);
 //Should be removed
 app.get('/comments', (req: Request, res: Response) => {
   const comments = [
