@@ -20,34 +20,39 @@ show_comments : boolean = false;
 ngOnInit(): void {
     this.fetchPosts();
     this.fetchComments();
-}
-/*fetchPosts(){
+    this.fetchPostsDummy();
+} 
+
+fetchPosts(){
 this.httpClient
-.get('https://jsonplaceholder.typicode.com/posts')
-.get('http://localhost:5000/posts')
+/* .get('https://jsonplaceholder.typicode.com/posts') */
+.get('http://localhost:3000/api/posts')
 .subscribe((posts : any)=>{
-console.log(posts);
 this.posts = posts;
+console.log(this.posts);
 })
-}*/
-fetchPosts() {
-  this.httpClient.get('http://localhost:3000/api/posts')
-    .subscribe((posts: any) => {
-      console.log(posts);
-      this.posts = posts;
-    }, error => {
-      console.error('Error fetching posts:', error);
-    });
 }
+
+fetchPostsDummy(){
+  this.httpClient
+  /* .get('https://jsonplaceholder.typicode.com/posts') */
+  .get('http://localhost:3000/posts')
+  .subscribe((posts : any)=>{
+  this.posts = posts;
+  console.log(this.posts);
+  })
+  }
+
+
 fetchComments() {
 this.httpClient
-.get('http://localhost:5000/comments')
+.get('http://localhost:3000/comments')
 .subscribe((comments: any) => {
 this.comments = comments;
 this.posts.forEach(post => {
 const postComments = this.comments.filter(comment => comment.postId === post.id);
 post.comments_count = postComments.length;
-post.showComments = false;
+post.showComments = false; 
 });
 })
 }
@@ -55,4 +60,3 @@ toggleComments(post: any) {
     post.showComments = !post.showComments;
     }
 }
-

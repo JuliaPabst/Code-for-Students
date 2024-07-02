@@ -1,6 +1,6 @@
 <div id="posts-container">
   <div id="all-posts">
-  @for(post of posts; track post.id) { 
+  @for(post of posts; track post._id) { 
   <div class="single-post">
   <div class="picture-username-date">
   <img
@@ -9,14 +9,14 @@
   alt="profile picture"
   />
   <div class="username-and-date">
-  <div class="username">{{ post.userName }}</div>
+  <div class="username">{{ post.username }}</div>
   <div class="post-date">{{ post.date }}</div>
   </div>
   </div>
   <div class="post">
-  <div class="post-text">{{ post.title }}</div>
+  <div class="post-text">{{ post.post_title }}</div>
   <div class="code-container">
-  <pre><code>{{ post.body }}</code></pre>
+  <pre><code>{{ post.post_content }}</code></pre>
   </div>
   <div class="comment-like-section">
   <div class="likes-container">
@@ -43,8 +43,8 @@
   </div>
   
   <div id="comments" *ngIf="post.showComments">
-  @for(comment of comments; track comment.id) { 
-  @if(comment.postId == post.id) { 
+  @for(comment of comments; track comment._id) { 
+  @if(comment.postId == post._id) { 
   
   <div class="single-comment">
   <hr />

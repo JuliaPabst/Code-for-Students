@@ -10,7 +10,7 @@ router.post('/api/posts/create', (req, res) => {
 
     try {
         // create new post and save to db
-        const newPost = new Post({ username, post_content, post_title });
+        const newPost = new Post({ username, post_content, post_title});
         newPost.save();
         res.status(200).json({ message: 'Post created successfully!' });
       } catch (error) {
