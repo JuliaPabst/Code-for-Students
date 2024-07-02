@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -37,7 +37,7 @@ export class LoginComponent {
   errorMessage = '';
   loginSuccess = false;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
@@ -54,11 +54,18 @@ export class LoginComponent {
     this.http.post<any>('http://localhost:3000/api/users/login', { email, password }).subscribe(
       (response) => {
         console.log('Login successful:', response);
-        this.loginSuccess = true; // Set login success to true
+        if (response.message === 'Login successful') { // Check for the specific message
+          this.loginSuccess = true; // Set login success to true
+          console.log('Login success set to true');
+        } else {
+          console.error('Unexpected response:', response);
+        }
+        this.cdr.detectChanges();
       },
       (error) => {
         console.error('Error logging in:', error);
         this.loginSuccess = false; // Ensure it's false in case of error
+        this.cdr.detectChanges();
       }
     );
   }

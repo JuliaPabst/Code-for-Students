@@ -53,8 +53,10 @@
       <mat-error *ngIf="registerForm.hasError('passwordMismatch')">Passwords are not the same.</mat-error>
     </div>
   </div>
+  <p *ngIf="registrationSuccess">Registration Successful!</p>
   <mat-error *ngIf="signupFailed">Sign up failed. There might be a problem with your username or your password!</mat-error>
+
   <button mat-raised-button type="submit">Sign up</button>
 </form>
 
-<p *ngIf="registrationSuccess">Registration Successful!</p>
+
