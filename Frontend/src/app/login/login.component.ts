@@ -26,13 +26,16 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MatButtonModule,
     MatDividerModule,
     NgIf,
-    HttpClientModule // Importiere HttpClientModule
+    HttpClientModule
   ],
   templateUrl: '../login/login.component.html',
   styleUrls: ['../login/login.component.css'],
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  hide = true;
+  errorMessage = '';
+  loginSuccess = false;
 
   constructor(private http: HttpClient) {
     this.loginForm = new FormGroup({
@@ -40,9 +43,6 @@ export class LoginComponent {
       password: new FormControl('', [Validators.required])
     });
   }
-
-  hide = true;
-  errorMessage = '';
 
   onSubmit() {
     if (this.loginForm.invalid) {
@@ -54,9 +54,11 @@ export class LoginComponent {
     this.http.post<any>('http://localhost:3000/api/users/login', { email, password }).subscribe(
       (response) => {
         console.log('Login successful:', response);
+        this.loginSuccess = true; // Set login success to true
       },
       (error) => {
         console.error('Error logging in:', error);
+        this.loginSuccess = false; // Ensure it's false in case of error
       }
     );
   }
