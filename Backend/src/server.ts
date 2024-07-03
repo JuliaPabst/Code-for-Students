@@ -7,6 +7,7 @@ import userRegister from '../routes/UserRegister';
 import userLogin from '../routes/UserLogin';
 import getPosts from '../routes/getPosts';
 import userProfile from '../routes/userProfile';
+import commentRoutes from '../routes/commentRoutes';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,6 +38,7 @@ app.use(userLogin);
 app.use(createPost);
 app.use(getPosts);
 app.use(userProfile);
+app.use(commentRoutes);
 //Should be removed
 app.get('/comments', (req: Request, res: Response) => {
   const comments = [
