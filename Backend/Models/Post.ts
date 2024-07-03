@@ -4,6 +4,7 @@ interface IPost extends Document {
   username: string;
   post_content: string;
   post_title: string;
+  createdAt: Date;
 }
 
 const PostSchema: Schema = new Schema({
