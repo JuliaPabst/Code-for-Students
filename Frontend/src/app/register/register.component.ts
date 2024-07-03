@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import {
   FormControl,
   Validators,
@@ -15,7 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { NgIf } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http'; // Importiere HttpClient und HttpClientModule
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +29,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'; // Importie
     MatButtonModule,
     MatDividerModule,
     NgIf,
-    HttpClientModule // Füge HttpClientModule zu den Imports hinzu
+    HttpClientModule
   ],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
@@ -64,6 +64,7 @@ export class RegisterComponent {
   hide = true;
   isLoading = false;
   signupFailed = false;
+  registrationSuccess = false; // New property to track registration success
 
   registerForm: FormGroup = this.fb.group(
     {
@@ -92,7 +93,8 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient // Injektieren des HttpClient
+    private http: HttpClient, 
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {}
@@ -116,32 +118,34 @@ export class RegisterComponent {
 
     if (this.registerForm.valid) {
       this.isLoading = true;
-      console.log('Login successful.');
 
       const formData = {
         username: this.registerForm.get('username')?.value,
         email: this.registerForm.get('email1')?.value,
-        password: this.registerForm.get('password1')?.value,
-        text: this.registerForm.get('text')?.value
+        password: this.registerForm.get('password1')?.value
       };
 
-      // Verwende HttpClient, um die Anmeldeinformationen zu senden
       this.http.post<any>('http://localhost:3000/api/users/register', formData).subscribe(
         (response) => {
           console.log('User registered:', response);
           this.isLoading = false;
+          this.registrationSuccess = true; // Set registration success to true
+          this.cdr.detectChanges();
         },
         (error) => {
-          console.error('Error in user Registration:', error);
+          console.error('Error in user registration:', error);
           this.signupFailed = true;
           this.isLoading = false;
+          this.registrationSuccess = false; // Ensure it's false in case of error
+          this.cdr.detectChanges();
         }
       );
 
       this.signupFailed = false;
+      this.cdr.detectChanges();
     } else {
-      console.log('Login failed.');
       this.signupFailed = true;
+      this.cdr.detectChanges();
     }
   }
 
