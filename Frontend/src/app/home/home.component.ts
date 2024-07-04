@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
             hour: '2-digit',
             minute: '2-digit'
           })
-        }));
+        })).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()); // Sort by date
         console.log(this.posts);
       }, error => {
         console.error('Error fetching posts:', error);

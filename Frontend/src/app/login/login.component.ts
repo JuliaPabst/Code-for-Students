@@ -57,6 +57,8 @@ export class LoginComponent {
         if (response.message === 'Login successful') { // Check for the specific message
           this.loginSuccess = true; // Set login success to true
           console.log('Login success set to true');
+          sessionStorage.setItem('username', response.user.username); // Save username to sessionStorage
+          sessionStorage.setItem('userId', response.user._id);
         } else {
           console.error('Unexpected response:', response);
         }

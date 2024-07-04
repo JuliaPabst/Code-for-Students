@@ -29,6 +29,8 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 export class CreatePostComponent {
   createTitle: string;
   createCode: string;
+  username: string | null = '';
+  userId: number | null = null;
 
   constructor(private http: HttpClient) {
     this.createTitle = '';
@@ -36,8 +38,16 @@ export class CreatePostComponent {
   }
 
   onSubmit(createPostForm: NgForm) {
+    this.username = sessionStorage.getItem('username');
+    const userIdStr = sessionStorage.getItem('userId');
+    if (userIdStr) {
+      this.userId = parseInt(userIdStr, 10);
+    }
+    console.log('Retrieved username:', this.username);
+    console.log('Retrieved userId:', this.userId);
+
     const postData = {
-      username: 'defaultUser', // Replace with actual username
+      username: this.username, 
       post_title: this.createTitle,
       post_content: this.createCode
     };
