@@ -1,6 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import {
+  NgForm,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 interface Post {
   _id: number;
@@ -26,7 +36,13 @@ interface Comment {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [HttpClientModule, CommonModule],
+  imports: [HttpClientModule, CommonModule, MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule,
+    MatDividerModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
@@ -34,10 +50,14 @@ export class HomeComponent implements OnInit {
   httpClient = inject(HttpClient);
   posts: Post[] = [];
   comments: Comment[] = [];
+  createComment: string = "";
 
   ngOnInit(): void {
     this.fetchPosts();
     this.fetchComments();
+  }
+
+  constructor(private http: HttpClient) {
   }
 
   fetchPosts() {
@@ -69,6 +89,22 @@ export class HomeComponent implements OnInit {
           post.comments_count = postComments.length;
           post.showComments = false;
         });
+      });
+  }
+
+  onSubmit(createForm: NgForm, post: Post) {
+    const Comment = {
+      postId: post._id,
+      name: "example",
+      email: "example",
+      body:  this.createComment 
+    };
+
+    this.http.post('http://localhost:3000//api/comments', Comment)
+      .subscribe(response => {
+        console.log(response);
+      }, error => {
+        console.error('Error creating post:', error);
       });
   }
 

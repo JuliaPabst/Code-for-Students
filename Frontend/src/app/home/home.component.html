@@ -1,77 +1,92 @@
 <div id="posts-container">
   <div id="all-posts">
-  @for(post of posts; track post._id) { 
-  <div class="single-post">
-  <div class="picture-username-date">
-  <img
-  class="profile-picture"
-  src="https://www.w3schools.com/howto/img_avatar.png"
-  alt="profile picture"
-  />
-  <div class="username-and-date">
-  <div class="username">{{ post.username }}</div>
-  <div class="post-date">{{ post.createdAt }}</div>
+    @for(post of posts; track post._id) {
+    <div class="single-post">
+      <div class="picture-username-date">
+        <img
+          class="profile-picture"
+          src="https://www.w3schools.com/howto/img_avatar.png"
+          alt="profile picture"
+        />
+        <div class="username-and-date">
+          <div class="username">{{ post.username }}</div>
+          <div class="post-date">{{ post.createdAt }}</div>
+        </div>
+      </div>
+      <div class="post">
+        <div class="post-text">{{ post.post_title }}</div>
+        <div class="code-container">
+          <pre><code>{{ post.post_content }}</code></pre>
+        </div>
+        <div class="comment-like-section">
+          <div class="likes-container">
+            <img
+              class="like-image"
+              src="../../assets/likes-image.jpeg"
+              alt="like image"
+            />
+            <span class="number-post-likes">{{ post.likes }}</span>
+            <span>Likes</span>
+          </div>
+          <div class="comments-container">
+            <img
+              class="comment-image"
+              src="../../assets/comment-image.webp"
+              alt="comment image"
+            />
+            <span class="number-post-comments">{{ post.comments_count }}</span>
+            <span class="comments">
+              <button mat-button (click)="toggleComments(post)" style="color: white;">
+                Comments
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div id="comments" *ngIf="post.showComments">
+        @for(comment of comments; track comment._id) { @if(comment.postId ==
+        post._id) {
+
+        <div class="single-comment">
+          <hr />
+          <div class="picture-username-date-comment">
+            <img
+              class="profile-picture-comment"
+              src="https://www.w3schools.com/howto/img_avatar.png"
+              alt="profile picture"
+            />
+            <div class="username-and-date-comment">
+              <div class="username-comment">{{ comment.name }}</div>
+              <div class="comment-date">{{ comment.date }}</div>
+            </div>
+          </div>
+          <div class="comment-content">
+            <div class="comment-text">{{ comment.email }}</div>
+            <div class="code-container-comment">
+              <pre><code>{{ comment.body }}</code></pre>
+            </div>
+          </div>
+        </div>
+        <form class="create-form" #createForm="ngForm" (ngSubmit)="onSubmit(createForm, post)">
+          <div id="comment">
+            <mat-form-field>
+              <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="4"
+                cdkAutosizeMaxRows="5"
+                required
+                placeholder="Comment"
+                [(ngModel)]="createComment"
+                name="comment"></textarea>
+            </mat-form-field>
+          </div>
+          <button mat-flat-button type="submit">Post</button>
+        </form>
+        } }
+      </div>
+    </div>
+    }
   </div>
-  </div>
-  <div class="post">
-  <div class="post-text">{{ post.post_title }}</div>
-  <div class="code-container">
-  <pre><code>{{ post.post_content }}</code></pre>
-  </div>
-  <div class="comment-like-section">
-  <div class="likes-container">
-  <img
-  class="like-image"
-  src="../../assets/likes-image.jpeg"
-  alt="like image"
-  />
-  <span class="number-post-likes">{{post.likes}}</span>
-  <span>Likes</span>
-  </div>
-  <div class="comments-container">
-  <img
-  class="comment-image"
-  src="../../assets/comment-image.webp"
-  alt="comment image"
-  />
-  <span class="number-post-comments">{{post.comments_count}}</span>
-  <span class="comments">
-  <button mat-button (click)="toggleComments(post)">Comments</button>
-  </span>
-  </div>
-  </div>
-  </div>
-  
-  <div id="comments" *ngIf="post.showComments">
-  @for(comment of comments; track comment._id) { 
-  @if(comment.postId == post._id) { 
-  
-  <div class="single-comment">
-  <hr />
-  <div class="picture-username-date-comment">
-  <img
-  class="profile-picture-comment"
-  src="https://www.w3schools.com/howto/img_avatar.png"
-  alt="profile picture"
-  />
-  <div class="username-and-date-comment">
-  <div class="username-comment">{{ comment.name }}</div>
-  <div class="comment-date">{{ comment.date }}</div>
-  </div>
-  </div>
-  <div class="comment-content">
-  <div class="comment-text">{{ comment.email }}</div>
-  <div class="code-container-comment">
-  <pre><code>{{ comment.body }}</code></pre>
-  </div>
-  </div>
-  </div>
-  } 
-  } 
-  </div>
-  </div>
-  } 
-  </div>
-  </div>
-  
-  
+</div>
