@@ -100,7 +100,7 @@ export class HomeComponent implements OnInit {
       body:  this.createComment 
     };
 
-    this.http.post('http://localhost:3000//api/comments', Comment)
+    this.http.post('http://localhost:3000/api/comments', Comment)
       .subscribe(response => {
         console.log(response);
       }, error => {
