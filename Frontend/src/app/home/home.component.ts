@@ -51,6 +51,8 @@ export class HomeComponent implements OnInit {
   posts: Post[] = [];
   comments: Comment[] = [];
   createComment: string = "";
+  username: string | null = '';
+  userId: number | null = null;
 
   ngOnInit(): void {
     this.fetchPosts();
@@ -101,10 +103,18 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmit(createForm: NgForm, post: Post) {
+    this.username = sessionStorage.getItem('username');
+    const userIdStr = sessionStorage.getItem('userId');
+    if (userIdStr) {
+      this.userId = parseInt(userIdStr, 10);
+    }
+    console.log('Retrieved username:', this.username);
+    console.log('Retrieved userId:', this.userId);
+
     const Comment = {
       postId: post._id,
-      name: "example",
-      email: "example",
+      name: this.username,
+      email: this.username,
       body:  this.createComment 
     };
 

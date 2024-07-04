@@ -131,6 +131,8 @@ export class RegisterComponent {
           this.isLoading = false;
           this.registrationSuccess = true; // Set registration success to true
           this.cdr.detectChanges();
+          sessionStorage.setItem('username', response.user.username); // Save username to sessionStorage
+          sessionStorage.setItem('userId', response.user._id);
         },
         (error) => {
           console.error('Error in user registration:', error);

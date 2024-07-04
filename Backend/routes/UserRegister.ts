@@ -12,7 +12,7 @@ router.post('/api/users/register', (req, res) => {
         // Erstellen eines neuen Benutzers und Speichern in der Datenbank
         const newUser = new User({ username, email, password, description });
         newUser.save();
-        res.status(200).json({ message: 'User registered successfully' });
+        res.status(200).json({ message: 'User registered successfully', newUser });
       } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Error saving user to the database' });
