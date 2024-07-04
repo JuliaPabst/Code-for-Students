@@ -58,12 +58,11 @@
             />
             <div class="username-and-date-comment">
               <div class="username-comment">{{ comment.name }}</div>
-              <div class="comment-date">{{ comment.date }}</div>
+              <div class="comment-date">{{ comment.createdAt }}</div>
             </div>
           </div>
           <div class="comment-content">
-            <div class="comment-text">{{ comment.email }}</div>
-            <div class="code-container-comment">
+            <div class="code-container-comment" style="background-color: white; color: black;">
               <pre><code>{{ comment.body }}</code></pre>
             </div>
           </div>

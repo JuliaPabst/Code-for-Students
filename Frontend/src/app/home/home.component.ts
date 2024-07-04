@@ -30,7 +30,7 @@ interface Comment {
   name: string;
   email: string;
   body: string;
-  date?: string; // Assuming comments have dates as well
+  createdAt: string; // Assuming comments have dates as well
 }
 
 @Component({
@@ -54,7 +54,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchPosts();
-    this.fetchComments();
   }
 
   constructor(private http: HttpClient) {
@@ -79,15 +78,24 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  fetchComments() {
-    this.httpClient.get<Comment[]>('http://localhost:3000/comments')
+  fetchComments(postId: number) {
+    this.httpClient.get<Comment[]>('http://localhost:3000/api/comments/' + postId)
       .subscribe((comments: Comment[]) => {
         console.log('Fetched comments:', comments);
         this.comments = comments;
+        this.comments = comments.map(comment => ({
+          ...comment,
+          createdAt: new Date(comment.createdAt).toLocaleString('de-DE', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          })
+        }));
         this.posts.forEach(post => {
           const postComments = this.comments.filter(comment => comment.postId === post._id);
           post.comments_count = postComments.length;
-          post.showComments = false;
         });
       });
   }
@@ -110,6 +118,7 @@ export class HomeComponent implements OnInit {
 
   toggleComments(post: Post) {
     post.showComments = !post.showComments;
+    this.fetchComments(post._id);
   }
 
   trackByPostId(index: number, post: Post): number {
